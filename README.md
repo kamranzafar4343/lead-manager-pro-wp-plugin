@@ -1,8 +1,8 @@
 # Lead Manager Pro
 
-A custom WordPress plugin built from scratch to manage website leads inside the WordPress dashboard.
+A custom WordPress plugin built from scratch to manage website leads directly inside the WordPress Admin Dashboard.
 
-Instead of only sending contact form emails, this plugin stores every inquiry as a Lead, allowing administrators to track, manage, and update customer inquiries from one place.
+Instead of only sending contact form emails, this plugin stores every inquiry as a Lead, allowing administrators to view, edit, organize, and track customer inquiries in one place.
 
 ---
 
@@ -15,57 +15,55 @@ Instead of only sending contact form emails, this plugin stores every inquiry as
 - Custom Meta Fields
 - Lead CRUD Operations
 - WordPress Hooks (Actions)
-- Shortcodes
+- WordPress Shortcodes
+- Nonce Security
 - Input Sanitization
-- WordPress Nonce Security
-- WordPress Plugin Architecture
 - Composer Integration
-- Dashboard Statistics (In Progress)
-- AJAX Submission (Coming Soon)
-- REST API (Coming Soon)
-- Email Notifications (Coming Soon)
-- CSV Export (Coming Soon)
+- Dashboard Statistics
+- Custom Admin Columns
+- Lead Status Management
 
 ---
 
-# Why this Plugin?
+# Why Lead Manager Pro?
 
-Normally a website contact form only sends an email.
+Normally a website contact form works like this:
 
-```
+```text
 Website
-    │
-    ▼
+   │
+   ▼
 Contact Form
-    │
-    ▼
-Admin Email
+   │
+   ▼
+Admin Email Inbox
 ```
 
-Problems
+### Problems
 
 - Emails get buried.
-- No lead history.
-- No search.
+- No history of leads.
+- No lead management.
 - No status tracking.
-- No reporting.
+- Difficult to search.
 - Difficult for teams to manage.
+- No reporting.
 
-Lead Manager Pro solves this by storing every inquiry inside WordPress.
+Lead Manager Pro solves this problem.
 
-```
+```text
 Website
-    │
-    ▼
+   │
+   ▼
 Lead Form
-    │
-    ▼
+   │
+   ▼
 WordPress
-    │
-    ▼
+   │
+   ▼
 Lead Manager Dashboard
-    │
-    ▼
+   │
+   ▼
 Manage Leads
 ```
 
@@ -73,7 +71,7 @@ Manage Leads
 
 # Current Workflow
 
-```
+```text
 Visitor
    │
    ▼
@@ -89,7 +87,7 @@ WordPress
 Create Lead (Custom Post Type)
    │
    ▼
-Store Details (Post Meta)
+Store Lead Details (Post Meta)
    │
    ▼
 Admin Dashboard
@@ -100,29 +98,29 @@ View / Edit / Update Lead
 
 ---
 
-# Current Functionality
+# Current Features
 
 ### Create Lead
 
-Stores a new lead.
+Store new leads from the frontend.
 
-### Read Leads
+### View Leads
 
-Displays all leads inside WordPress.
+View all submitted leads inside the WordPress Admin Dashboard.
 
 ### Update Lead
 
-Allows editing lead information.
+Edit lead details and update lead status.
 
 ### Delete Lead
 
-Uses the built-in WordPress Trash.
+Uses the built-in WordPress Trash system.
 
 ---
 
 # Lead Information
 
-Each Lead stores
+Each lead stores:
 
 - Name
 - Email
@@ -137,7 +135,7 @@ Each Lead stores
 
 # Lead Status
 
-Current statuses
+Current statuses include:
 
 - New
 - Contacted
@@ -153,10 +151,10 @@ Current statuses
 
 - Plugin Header
 - Plugin Bootstrap
-- ABSPATH Security
 - Plugin Constants
 - Composer
 - Autoloading
+- ABSPATH Security
 
 ---
 
@@ -166,7 +164,6 @@ Current statuses
 - Constructors
 - Object-Oriented Programming
 - File Separation
-- Namespaces (Future)
 
 ---
 
@@ -184,7 +181,7 @@ Current statuses
 
 Created a custom post type:
 
-```
+```text
 lmp_lead
 ```
 
@@ -192,37 +189,43 @@ instead of creating a custom database table.
 
 ---
 
-## Custom Meta Fields
+## Post Meta
 
-Used Post Meta for storing
+Lead details are stored using WordPress Post Meta.
 
+Fields include:
+
+- Name
 - Email
 - Phone
 - Company
-- Budget
 - Service
-- Status
+- Budget
 - Message
+- Status
 
 ---
 
 ## Security
 
-- ABSPATH
+Implemented:
+
+- ABSPATH protection
 - Nonce Verification
 - Input Sanitization
 
-Using
+Functions used:
 
 - sanitize_text_field()
 - sanitize_email()
 - sanitize_textarea_field()
+- wp_verify_nonce()
 
 ---
 
-## Admin Panel
+## Admin Dashboard
 
-Implemented
+Implemented:
 
 - Custom Dashboard
 - Custom Menu
@@ -234,7 +237,7 @@ Implemented
 
 # Project Structure
 
-```
+```text
 lead-manager-pro/
 
 │
@@ -268,16 +271,200 @@ lead-manager-pro/
 - PHP
 - WordPress
 - Composer
-- Carbon Fields
 - HTML
 - CSS
 - JavaScript
 
 ---
 
+# Installation
+
+## Requirements
+
+- PHP 8.0+
+- WordPress 6.x+
+- Composer
+
+---
+
+## Step 1
+
+Clone the repository
+
+```bash
+git clone https://github.com/yourusername/lead-manager-pro.git
+```
+
+or download the ZIP.
+
+---
+
+## Step 2
+
+Move the plugin folder into:
+
+```text
+wp-content/plugins/
+```
+
+Final structure should be:
+
+```text
+wp-content/
+└── plugins/
+    └── lead-manager-pro/
+        ├── contact-plugin.php
+        ├── composer.json
+        ├── includes/
+        ├── templates/
+        └── assets/
+```
+
+---
+
+## Step 3
+
+Open Terminal
+
+```bash
+cd wp-content/plugins/lead-manager-pro
+```
+
+Run:
+
+```bash
+composer install
+```
+
+Composer will install all required packages and create the **vendor/** directory.
+
+---
+
+## Step 4
+
+Open your WordPress Admin Dashboard.
+
+Go to:
+
+```text
+Plugins
+```
+
+Activate:
+
+```text
+Lead Manager Pro
+```
+
+---
+
+# Usage
+
+## Create the Lead Form Page
+
+Go to:
+
+```text
+Pages
+→ Add New
+```
+
+Create a page named:
+
+```text
+Get Quote
+```
+
+or
+
+```text
+Contact Us
+```
+
+Add the shortcode:
+
+```text
+[lead_form]
+```
+
+Publish the page.
+
+---
+
+## Submit a Lead
+
+Visit the page from the frontend.
+
+Fill in:
+
+- Name
+- Email
+- Phone
+- Company
+- Service
+- Budget
+- Message
+
+Click:
+
+```text
+Submit
+```
+
+---
+
+## View Leads
+
+Go to:
+
+```text
+WordPress Admin
+
+Lead Manager
+
+↓
+
+Leads
+```
+
+Here you can:
+
+- View all leads
+- Edit leads
+- Update lead status
+- Delete (Trash) leads
+
+---
+
+# Current Project Flow
+
+```text
+Website Visitor
+        │
+        ▼
+Lead Form
+        │
+        ▼
+WordPress Shortcode
+        │
+        ▼
+Create Custom Post Type
+        │
+        ▼
+Save Post Meta
+        │
+        ▼
+Lead Manager Dashboard
+        │
+        ▼
+Manage Leads
+```
+
+---
+
 # Future Improvements
 
-- AJAX Lead Submission
+- AJAX Submission
 - REST API
 - Email Notifications
 - Dashboard Widgets
@@ -290,9 +477,9 @@ lead-manager-pro/
 
 ---
 
-# What I Learned
+# Learning Outcomes
 
-During this project I learned
+This project helped me understand:
 
 - WordPress Plugin Architecture
 - Object-Oriented Plugin Development
@@ -301,7 +488,7 @@ During this project I learned
 - Meta Boxes
 - Admin Menus
 - Custom Columns
-- WordPress Security
+- Plugin Security
 - Composer Integration
 - WordPress Coding Standards
 
@@ -309,42 +496,49 @@ During this project I learned
 
 # Interview Topics Covered
 
-This project demonstrates knowledge of
+This project demonstrates knowledge of:
 
-- Plugin Development
-- OOP PHP
+- WordPress Plugin Development
+- PHP OOP
 - WordPress Hooks
+- Shortcodes
 - Custom Post Types
 - Meta Fields
-- Admin Development
-- Security Best Practices
+- Admin Dashboard Development
 - CRUD Operations
-- WordPress Plugin Structure
+- Security Best Practices
+- Composer
+- Plugin Structure
 
 ---
 
-# Current Project Status
+# Project Status
 
-✔ Plugin Bootstrap
+## Completed
 
-✔ Admin Dashboard
+- Plugin Bootstrap
+- Admin Dashboard
+- Custom Post Type
+- Lead CRUD
+- Meta Fields
+- Custom Columns
+- Lead Status Management
+- Frontend Lead Form
 
-✔ Custom Post Type
+## Planned
 
-✔ Lead CRUD
+- AJAX Submission
+- REST API
+- Email Notifications
+- CSV Export
+- Dashboard Widgets
+- Search & Filters
+- Webhooks
 
-✔ Meta Fields
+---
 
-✔ Custom Columns
+## Author
 
-✔ Status Management
+**Kamran Zafar**
 
-🚧 AJAX
-
-🚧 REST API
-
-🚧 Email Notifications
-
-🚧 CSV Export
-
-🚧 Dashboard Widgets
+Backend Developer | PHP | Laravel | WordPress | Oracle SQL
